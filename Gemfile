@@ -29,6 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Used for sending sensitive data
 gem 'figaro', '1.0'
 
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
