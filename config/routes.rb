@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
+  resources :topics do
+    resources :bookmarks
+  end
+
   post :incoming, to: 'incoming#create'
 
   get 'about' => 'welcome#about'

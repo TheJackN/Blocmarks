@@ -8,16 +8,26 @@ class IncomingController < ApplicationController
     # You put the message-splitting and business
     # magic here.
 
-    # Find the user by using params[:sender]
-    # Find the topic by using params[:subject]
-    # Assign the url to a variable after retreiving it from params["body-plain"]
+    @user = User.where(email: params[:sender])
+    @topic = Topic.where(title: params[:subject])
+    bookmark_url = params["body-plain"]
 
-    # Check if user is nil, if so, create and save a new user
+    if @user.nil?
+      # generated_password = Devise.friendly_token.first(8)
+      # @user = User.create!(:email => params[:sender], :password => generated_password)
+      # # @user.save
+      #
+      # # RegistrationMailer.welcome(@user, generated_password).deliver
+      break
+    end
 
-    # Check if the topic is nil, if so, create and save a new topic
+    if @topic.nil?
+      @topic = Topic.create!(:user => @user, :title => params[:subject])
+      @topic.save
+    end
 
-    # Now that you're sure you have a valid user and topic, build and save a new bookmark
-
+    @bookmark = @topic.bookmarks.build(url: bookmark_url)
+    @bookmark.save
 
     # Assuming all went well.
     head 200
