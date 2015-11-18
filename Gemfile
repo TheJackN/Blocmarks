@@ -38,6 +38,9 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Used to easily create authorization policies
+gem 'pundit'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'

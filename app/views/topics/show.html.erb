@@ -1,0 +1,23 @@
+<h2 class="text-center"><%= @topic.title %></h2>
+
+<div class="row">
+  <div class="col-md-4">
+    <% if @topic.bookmarks.nil? %>
+      <h2>No Bookmarks for This Topic Yet!</h2>
+    <% else %>
+      <% @topic.bookmarks.each do |bookmark| %>
+        <div class="col-xs-6 col-md-3">
+          <%= link_to img_tag("img.png", border: 0), bookmark.url %>
+          <div class="caption">
+            <p>Like</p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <br />
+  <div class="text-right">
+    <%= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-success' %>
+    <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+  </div>
+</div>
