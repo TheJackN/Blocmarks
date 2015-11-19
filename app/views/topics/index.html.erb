@@ -15,7 +15,7 @@
         <% else %>
           <% topic.bookmarks[0..3].each do |bookmark| %>
             <div class="col-xs-6 col-md-3">
-              <%= link_to img_tag("img.png", border: 0), bookmark.url %>
+              <%= link_to "IMAGE", [bookmark.topic, bookmark] %>
               <div class="caption">
                 <p>Like</p>
               </div>
