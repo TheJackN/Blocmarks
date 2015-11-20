@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   after_action :verify_authorized, except: [:index, :show]
 
   def index
-    @topics = policy_scope(Topic.all)
+    @topics = Topic.all
   end
 
   def show

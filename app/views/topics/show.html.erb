@@ -1,15 +1,16 @@
 <h2 class="text-center"><%= @topic.title %></h2>
 
 <div class="row">
+  <br />
   <div class="col-md-4">
-    <% if @topic.bookmarks.nil? %>
-      <h2>No Bookmarks for This Topic Yet!</h2>
+    <% if @topic.bookmarks.nil? || @topic.bookmarks == []%>
+      <h3>No Bookmarks Yet!</h3>
     <% else %>
       <% @topic.bookmarks.each do |bookmark| %>
         <div class="col-xs-6 col-md-3">
-          <%= link_to "IMAGE", [bookmark.topic, bookmark] %>
+          <%= link_to "#{bookmark.url}", [bookmark.topic, bookmark] %>
           <div class="caption">
-            <p>Like</p>
+            <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
           </div>
         </div>
       <% end %>
@@ -17,7 +18,7 @@
   </div>
   <br />
   <div class="text-right">
-    <%= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-success' %>
-    <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+      <%= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-success' %>
+      <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
   </div>
 </div>

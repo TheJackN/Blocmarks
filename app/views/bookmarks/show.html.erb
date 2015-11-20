@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <a href="<% @bookmark.url.html_safe %>" target="_blank"><img src="http://placehold.it/350x150"></a>
         <div class="caption">
-          <p>Like</p>
+          <%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
         </div>
       </div>
   </div>
