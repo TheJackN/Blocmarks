@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :load_user, except: [:mytopics]
 
   def show
+    @user_topics = current_user.topics.all
+    @liked_bookmarks = current_user.likes.all
   end
 
   def mytopics

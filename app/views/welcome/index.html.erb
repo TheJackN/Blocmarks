@@ -1,2 +1,24 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<br>
+<div class="jumbotron">
+  <h1>Blocmarks</h1>
+  <p>Blocmarks is a social bookmarking tool!</p>
+  <p>
+    <%= link_to "Sign In", new_user_session_path %> or
+    <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %> today!
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h2>Keep track of your favoritve websites!</h2>
+    <p>Easily keep track of your favorite sites and organize them with topics.</p>
+  </div>
+  <div class="col-md-4">
+    <h2>Free To Use</h2>
+    <p>Bloccit is free for everyone, everywhere!</p>
+  </div>
+  <div class="col-md-4">
+    <h2>Share with friends</h2>
+    <p>Easily favorite and save your friends' bookmarks through the favoriting system!</p>
+  </div>
+</div>

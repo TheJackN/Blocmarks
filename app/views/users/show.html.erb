@@ -1,16 +1,65 @@
-<div class="row">
-  <div class="col-md-8">
-    <div class="media">
-      <br />
-      <% avatar_url = User.avatar_url(@user, 128) %>
-      <% unless avatar_url.nil? %>
-        <div class="media-left">
-          <%= image_tag avatar_url, class: 'media-object' %>
+<h2>My Profile</h2>
+<br />
+<div class="text-center">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="text text-center"><u>Account Info</u></h4>
         </div>
-      <% end %>
-      <div class="media-body">
-        <h2 class="media-heading"><%= @user.email %></h2>
+        <div class="panel-body">
+          <div class="text text-center">
+            <br />
+            <p><strong>Name:</strong> <%= @user.name %></p>
+            <p><strong>Email:</strong> <%= @user.email %></p>
+            <p><%= link_to 'Edit Profile Info', edit_user_registration_path, class: 'btn btn-success' %></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<h2 class="text text-center">My Blocmarks</h2>
+<br />
+  <% if @user_topics.nil? %>
+    <h3>No Topics!</h3>
+  <% else %>
+    <% @user_topics.each do |topic| %>
+      <div class="media-heading">
+        <h4 class="text-left"><u><%= link_to topic.title, topic %></u></h4>
+      </div>
+      <% if topic.bookmarks.nil? %>
+        <p>Topic Empty!</p>
+      <% else %>
+        <div class="row">
+          <% topic.bookmarks.each do |bookmark| %>
+            <div class="col-xs-6 col-md-3">
+              <%= link_to [bookmark.topic, bookmark] do %>
+                <%= image_tag('http://lorempixel.com/output/abstract-q-g-200-200-9.jpg') %>
+              <% end %>
+              <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
+            </div>
+          <% end %>
+        </div>
+        <br />
+      <% end %>
+    <% end %>
+  <% end %>
+<br />
+<br />
+<h2 class="text text-center">Favorited Bookmarks</h2>
+<br />
+<% if @liked_bookmarks.nil? %>
+  <h3>No Liked Bookmarks!</h3>
+<% else %>
+  <div class="row">
+    <% @liked_bookmarks.each do |like| %>
+      <div class="col-xs-6 col-md-3">
+        <%= link_to [like.bookmark.topic, like.bookmark] do %>
+          <%= image_tag('http://lorempixel.com/output/abstract-q-g-200-200-9.jpg') %>
+        <% end %>
+        <%= render partial: 'likes/like', locals: { bookmark: like.bookmark } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

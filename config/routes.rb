@@ -12,10 +12,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # get 'my_topics' => 'topics#mytopics'
-
-  # get 'mytopics' => 'topics#mytopics'
-
   post :incoming, to: 'incoming#create'
 
   get 'about' => 'welcome#about'

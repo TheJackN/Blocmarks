@@ -1,24 +1,31 @@
 <h2 class="text-center"><%= @topic.title %></h2>
-
-<div class="row">
-  <br />
-  <div class="col-md-4">
-    <% if @topic.bookmarks.nil? || @topic.bookmarks == []%>
-      <h3>No Bookmarks Yet!</h3>
-    <% else %>
-      <% @topic.bookmarks.each do |bookmark| %>
-        <div class="col-xs-6 col-md-3">
-          <%= link_to "#{bookmark.url}", [bookmark.topic, bookmark] %>
-          <div class="caption">
+<% if policy(@topic).destroy? %>
+<div class="text-right">
+    <%= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-success' %>
+    <%= link_to "Edit Topic", edit_topic_path(@topic), class: 'btn btn-primary' %>
+    <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+</div>
+<% end %>
+<br />
+<br />
+<% if @topic.bookmarks.nil? || @topic.bookmarks == []%>
+  <h3>No Bookmarks Yet!</h3>
+<% else %>
+  <div class="row">
+    <% @topic.bookmarks.each_slice(4) do |bookmark_array| %>
+      <div class="row">
+        <% bookmark_array.each do |bookmark| %>
+          <div class="col-xs-6 col-md-3">
+            <%= link_to [bookmark.topic, bookmark], style: "text-decoration:none;" do %>
+              <%= image_tag('http://lorempixel.com/output/abstract-q-g-200-200-9.jpg') %>
+            <% end %>
+            <br />
             <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
+            <br />
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
   <br />
-  <div class="text-right">
-      <%= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-success' %>
-      <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this topic?'} %>
-  </div>
-</div>
+<% end %>
