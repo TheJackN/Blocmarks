@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <h4 class="text-left">Enter your new bookmark URL<h4>
     <br />
-  <%= form_for @bookmark do |f| %>
+  <%= form_for [@bookmark.topic, @bookmark] do |f| %>
     <div class="form-group">
       <%= f.label :url %>
       <%= f.text_field :url, class: 'form-control', placeholder: "Enter Topic Name", autofocus: true %>

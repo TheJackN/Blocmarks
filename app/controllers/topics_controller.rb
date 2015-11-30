@@ -47,8 +47,7 @@ class TopicsController < ApplicationController
   def destroy
     if @topic.destroy
       flash[:notice] = "\"#{@topic.title}\" successfully deleted."
-      render :index
-      # redirect_to action: :index
+      redirect_to user_mytopics_path(current_user.id)
     else
       flash[:error] = "There was an error deleting the Topic"
       rednder :show
