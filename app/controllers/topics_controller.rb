@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
 
     if @topic.save
       flash[:notice] = "Topic created successfully"
-      render :show
+      redirect_to @topic
     else
       flash[:error] = "There was an error creating the topic. Please try again"
       render :new
@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
       redirect_to user_mytopics_path(current_user.id)
     else
       flash[:error] = "There was an error deleting the Topic"
-      rednder :show
+      render :show
     end
   end
 

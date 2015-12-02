@@ -6,8 +6,15 @@
   <%= form_for @topic do |f| %>
     <div class="form-group">
       <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control', placeholder: "Enter Topic Name", autofocus: true %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Enter Topic Name", autofocus: true, id: 'attr-to-send' %>
     </div>
-    <%= f.submit "Save", class: 'btn btn-success' %>
+    <%= f.submit "Save", class: 'btn btn-success', id: 'commit-and-send' %>
   <% end %>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#commit-and-send').on('click', function(){
+      blocmetrics.report($('#attr-to-send').val());
+    })
+  })
+</script>
